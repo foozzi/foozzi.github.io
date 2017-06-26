@@ -4,7 +4,7 @@
   <title><![CDATA[Security Idot]]></title>
   <link href="http://foozzi.github.io/atom.xml" rel="self"/>
   <link href="http://foozzi.github.io/"/>
-  <updated>2017-06-26T09:15:47+00:00</updated>
+  <updated>2017-06-26T09:16:51+00:00</updated>
   <id>http://foozzi.github.io/</id>
   <author>
     <name><![CDATA[foozzi]]></name>
@@ -26,12 +26,15 @@
 <h2>Wordpress и premiumbox</h2>
 
 <p>Существует ряд плагинов для этой недоcms, которые позволяют расширить функционал недоблога
-до недообменного сервиса, например - <a href="https://pluginu.com/premiumbox/">https://pluginu.com/premiumbox/</a>
-В сети уже продавались эксплоиты для него, если не ошибаюсь за 10btc и уже успешно проданы.
-Сам же wordpress это сплошная дыра, с новой версии которой возникают еще более серьезные
+до недообменного сервиса, например - <a href="https://pluginu.com/premiumbox/">https://pluginu.com/premiumbox/</a></p>
+
+<p>В сети уже продавались эксплоиты для него, если не ошибаюсь за 10btc и уже успешно проданы.</p>
+
+<p>Сам же wordpress это сплошная дыра, с новой версии которой возникают еще более серьезные
 уязвимости, причем очень смешные, такие как например &ldquo;content injection&rdquo; -
-<a href="https://pluginu.com/premiumbox/">https://pluginu.com/premiumbox/</a>
-Уязвимые версии <strong>4.7</strong> - <strong>4.7.1</strong>, написав небольшой скрипт, я удостоверился что около
+<a href="https://pluginu.com/premiumbox/">https://pluginu.com/premiumbox/</a></p>
+
+<p>Уязвимые версии <strong>4.7</strong> - <strong>4.7.1</strong>, написав небольшой скрипт, я удостоверился что около
 <strong>70%</strong> (70 - Карл!) обменников на bestchange, именно на wordpress, тогда я решил проверить
 уязвимость на них, написал еще один скрипт, которые внедряет в пост нужный мне контент:</p>
 
