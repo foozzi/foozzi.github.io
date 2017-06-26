@@ -4,7 +4,7 @@
   <title><![CDATA[Security Idiot]]></title>
   <link href="http://foozzi.github.io/atom.xml" rel="self"/>
   <link href="http://foozzi.github.io/"/>
-  <updated>2017-06-26T16:45:10+00:00</updated>
+  <updated>2017-06-26T16:47:53+00:00</updated>
   <id>http://foozzi.github.io/</id>
   <author>
     <name><![CDATA[foozzi]]></name>
@@ -88,7 +88,7 @@ echo shell_exec($_GET['cmd']);
 
 <h2>Вывод</h2>
 
-<p>Тех. специалисты ukraine.com.ua еще те идиоты. Лучше бы и не выебываелись.</p>
+<p>Тех. специалисты ukraine.com.ua еще те идиоты. Лучше бы и не выебывались.</p>
 ]]></content>
   </entry>
   
