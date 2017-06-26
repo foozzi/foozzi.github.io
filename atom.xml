@@ -4,7 +4,7 @@
   <title><![CDATA[Security Idot]]></title>
   <link href="http://foozzi.github.io/atom.xml" rel="self"/>
   <link href="http://foozzi.github.io/"/>
-  <updated>2017-06-26T09:14:23+00:00</updated>
+  <updated>2017-06-26T09:15:47+00:00</updated>
   <id>http://foozzi.github.io/</id>
   <author>
     <name><![CDATA[foozzi]]></name>
@@ -14,13 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Обенники]]></title>
+    <title type="html"><![CDATA[Обенники, котовые вы любите]]></title>
     <link href="http://foozzi.github.io/blog/2017/06/26/obienniki/"/>
     <updated>2017-06-26T08:53:02+00:00</updated>
     <id>http://foozzi.github.io/blog/2017/06/26/obienniki</id>
-    <content type="html"><![CDATA[<h1>Обенники, котовые вы любите</h1>
-
-<p>Почти каждый, кто хоть раз менял валюту онлайн, обращался к &ldquo;авторитетным&rdquo; и &ldquo;проверенным&rdquo;
+    <content type="html"><![CDATA[<p>Почти каждый, кто хоть раз менял валюту онлайн, обращался к &ldquo;авторитетным&rdquo; и &ldquo;проверенным&rdquo;
 мониторинговым сервисам, как например этот - <strong>bestchange.ru</strong>
 Да, безусловно обменники там практически все проверенные и не вызывают подозрения. Но,
 например не каждый смотрит на безопасность веб-приложения когда совершает обмен.</p>
