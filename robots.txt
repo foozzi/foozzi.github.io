@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://securityidiot.today/sitemap.xml 
+Sitemap: http://foozzi.github.com//sitemap.xml 
