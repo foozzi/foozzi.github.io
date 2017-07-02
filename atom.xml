@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Security Idiot]]></title>
-  <link href="http://foozzi.github.io/atom.xml" rel="self"/>
-  <link href="http://foozzi.github.io/"/>
-  <updated>2017-07-02T14:26:51+00:00</updated>
-  <id>http://foozzi.github.io/</id>
+  <link href="http://securityidiot.today/atom.xml" rel="self"/>
+  <link href="http://securityidiot.today/"/>
+  <updated>2017-07-02T15:07:39+00:00</updated>
+  <id>http://securityidiot.today/</id>
   <author>
     <name><![CDATA[foozzi]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Галактика багов]]></title>
-    <link href="http://foozzi.github.io/blog/2017/07/02/galaktika-baghov/"/>
+    <link href="http://securityidiot.today/blog/2017/07/02/galaktika-baghov/"/>
     <updated>2017-07-02T14:18:41+00:00</updated>
-    <id>http://foozzi.github.io/blog/2017/07/02/galaktika-baghov</id>
+    <id>http://securityidiot.today/blog/2017/07/02/galaktika-baghov</id>
     <content type="html"><![CDATA[<p>Есть некая соц. сеть <strong>galactikka.com</strong>, которая работает довольно давно, а так же имеет
 ряд уязвимостей, за которые разработчикам должно быть стыдно :)</p>
 
@@ -110,9 +110,9 @@
   
   <entry>
     <title type="html"><![CDATA[Исходный код default.php в Hostinger-подобных хостингах]]></title>
-    <link href="http://foozzi.github.io/blog/2017/07/01/iskhodnyi-kod-default-dot-php-v-hostinger-podobnykh-khostinghakh/"/>
+    <link href="http://securityidiot.today/blog/2017/07/01/iskhodnyi-kod-default-dot-php-v-hostinger-podobnykh-khostinghakh/"/>
     <updated>2017-07-01T08:45:03+00:00</updated>
-    <id>http://foozzi.github.io/blog/2017/07/01/iskhodnyi-kod-default-dot-php-v-hostinger-podobnykh-khostinghakh</id>
+    <id>http://securityidiot.today/blog/2017/07/01/iskhodnyi-kod-default-dot-php-v-hostinger-podobnykh-khostinghakh</id>
     <content type="html"><![CDATA[<h2>Предыстория</h2>
 
 <p>Когда то наткнулся на пост кробера о листинге файлов через default.php
@@ -862,9 +862,9 @@
   
   <entry>
     <title type="html"><![CDATA[Обход '424 Failed Dependency' на хостингах ukraine.com.ua]]></title>
-    <link href="http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/"/>
+    <link href="http://securityidiot.today/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua/"/>
     <updated>2017-06-26T16:23:58+00:00</updated>
-    <id>http://foozzi.github.io/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua</id>
+    <id>http://securityidiot.today/blog/2017/06/26/obkhod-424-failed-dependency-na-khostinghakh-ukraine-dot-com-dot-ua</id>
     <content type="html"><![CDATA[<p>Или почему специалисты ukraine.com.ua - идиоты.</p>
 
 <p>Сегодня столкнулся с проблемой при попытке взаимодействовать через мини-шелл с файлами на
@@ -941,9 +941,9 @@ echo shell_exec($_GET['cmd']);
   
   <entry>
     <title type="html"><![CDATA[Обенники, котовые вы любите]]></title>
-    <link href="http://foozzi.github.io/blog/2017/06/26/obienniki/"/>
+    <link href="http://securityidiot.today/blog/2017/06/26/obienniki/"/>
     <updated>2017-06-26T08:53:02+00:00</updated>
-    <id>http://foozzi.github.io/blog/2017/06/26/obienniki</id>
+    <id>http://securityidiot.today/blog/2017/06/26/obienniki</id>
     <content type="html"><![CDATA[<p>Почти каждый, кто хоть раз менял валюту онлайн, обращался к &ldquo;авторитетным&rdquo; и &ldquo;проверенным&rdquo;
 мониторинговым сервисам, как например этот - <strong>bestchange.ru</strong>
 Да, безусловно обменники там практически все проверенные и не вызывают подозрения. Но,
