@@ -4,7 +4,7 @@
   <title><![CDATA[Security Idiot]]></title>
   <link href="http://foozzi.github.com/atom.xml" rel="self"/>
   <link href="http://foozzi.github.com/"/>
-  <updated>2017-07-02T15:12:29+00:00</updated>
+  <updated>2017-07-02T23:25:51+00:00</updated>
   <id>http://foozzi.github.com/</id>
   <author>
     <name><![CDATA[foozzi]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Как я вернул старый linuxforum.ru]]></title>
+    <link href="http://foozzi.github.com/blog/2017/07/02/kak-ia-viernul-staryi-linuxforum-dot-ru/"/>
+    <updated>2017-07-02T23:22:17+00:00</updated>
+    <id>http://foozzi.github.com/blog/2017/07/02/kak-ia-viernul-staryi-linuxforum-dot-ru</id>
+    <content type="html"><![CDATA[<p>Видео не первой свежести, но все же решил закинуть сюда.</p>
+
+<p><a href="https://www.youtube.com/watch?v=m-0l9S76nlM"><img src="https://img.youtube.com/vi/m-0l9S76nlM/0.jpg" alt="_" /></a></p>
+
+<h2>З.Ы</h2>
+
+<p>Еще и благодарны были, старички форума ;)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Галактика багов]]></title>
